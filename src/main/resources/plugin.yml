@@ -1,0 +1,71 @@
+name: AuctionsPlus
+version: 0.1.0
+main: dev.auctionsplus.AuctionsPlusPlugin
+api-version: '26.1.2'
+author: SQWARE / Conflict
+website: https://sqware.gg
+description: A modern auction house with GUI listings, expiry returns, claim mail, and Vault economy support.
+depend:
+  - Vault
+commands:
+  ah:
+    description: Open and use the Auctions+ auction house.
+    usage: /ah [sell|auction|buy|bid|active|claim|search|cancel|help]
+    aliases:
+      - auc
+      - auctionhouse
+      - auctions
+  auctionsplus:
+    description: Manage Auctions+.
+    usage: /auctionsplus [stats|reload|save|cancel]
+    aliases:
+      - ahadmin
+permissions:
+  auctionsplus.use:
+    description: Allows opening the auction house.
+    default: true
+  auctionsplus.sell:
+    description: Allows listing items for sale.
+    default: true
+  auctionsplus.auction:
+    description: Allows creating timed bid auctions.
+    default: true
+  auctionsplus.buy:
+    description: Allows buying auction listings.
+    default: true
+  auctionsplus.bid:
+    description: Allows bidding on timed auctions.
+    default: true
+  auctionsplus.cancel:
+    description: Allows cancelling your own active listings.
+    default: true
+  auctionsplus.claim:
+    description: Allows claiming purchased, cancelled, and expired items.
+    default: true
+  auctionsplus.search:
+    description: Allows opening filtered auction searches.
+    default: true
+  auctionsplus.limit.bypass:
+    description: Bypasses the configured active listing limit.
+    default: op
+  auctionsplus.fees.bypass:
+    description: Bypasses listing fees and sale tax.
+    default: op
+  auctionsplus.notify:
+    description: Receives Auctions+ chat announcements when permission audience is enabled.
+    default: true
+  auctionsplus.admin:
+    description: Allows administrative Auctions+ commands.
+    default: op
+    children:
+      auctionsplus.use: true
+      auctionsplus.sell: true
+      auctionsplus.auction: true
+      auctionsplus.buy: true
+      auctionsplus.bid: true
+      auctionsplus.cancel: true
+      auctionsplus.claim: true
+      auctionsplus.search: true
+      auctionsplus.notify: true
+      auctionsplus.limit.bypass: true
+      auctionsplus.fees.bypass: true

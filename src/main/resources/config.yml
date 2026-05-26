@@ -1,0 +1,153 @@
+# AuctionsPlus
+# Used for update checks.
+# Do not change unless you know what you are doing.
+config-version: 9
+
+economy:
+  min-price: 1.0
+  # Set to 0 to disable the maximum price limit.
+  max-price: 1000000000.0
+  allow-buy-own-listings: false
+
+bidding:
+  enabled: true
+  # Minimum amount a new bid must beat the current bid by.
+  min-increment-flat: 1.0
+  # Maximum allowed bid. Set to 0 to disable the maximum bid limit.
+  max-bid: 1000000000.0
+
+listings:
+  default-duration-hours: 72
+  max-duration-hours: 168
+  max-active-per-player: 20
+  expire-check-seconds: 60
+  save-interval-seconds: 300
+  blacklisted-materials:
+    - AIR
+    - BEDROCK
+    - BARRIER
+    - COMMAND_BLOCK
+    - CHAIN_COMMAND_BLOCK
+    - REPEATING_COMMAND_BLOCK
+    - STRUCTURE_BLOCK
+    - STRUCTURE_VOID
+    - JIGSAW
+    - DEBUG_STICK
+
+fees:
+  # Charged when a listing is created. Set to 0 to disable.
+  listing-flat: 0.0
+  # Removed from the seller payout on successful sale. Set to 0 to disable.
+  sale-tax-percent: 0.0
+
+announcements:
+  enabled: true
+  # Options: all, world, permission, none
+  audience: "permission"
+  permission: "auctionsplus.notify"
+  events:
+    listing-created: true
+    listing-sold: true
+    bid-placed: true
+    auction-won: true
+    listing-cancelled: false
+    listing-expired: false
+  messages:
+    listing-created: "&f{seller}&7 listed &f{amount}x {item}&7 {price_label} &#2b98fd{price}&7. Use &#2b98fd/ah&7."
+    listing-sold: "&f{buyer}&7 bought &f{item}&7 from &f{seller}&7 for &#2b98fd{price}&7."
+    bid-placed: "&f{bidder}&7 bid &#2b98fd{bid}&7 on &f{item}&7 by &f{seller}&7. Use &#2b98fd/ah bid {id} {next_bid}&7."
+    auction-won: "&f{winner}&7 won &f{item}&7 from &f{seller}&7 for &#2b98fd{price}&7."
+    listing-cancelled: "&f{seller}&7 cancelled auction &f#{id}&7 for &f{item}&7."
+    listing-expired: "&f{seller}&7's listing for &f{item}&7 expired."
+
+gui:
+  title-browse: "&#2b98fdAuctions"
+  title-confirm: "&#2b98fdConfirm Purchase"
+  title-active: "&#2b98fdYour Listings"
+  title-claim: "&#2b98fdClaim Mail"
+
+messages:
+  prefix: "&#2b98fdAuctions+ &8> &7"
+  no-permission: "&#ED4245You do not have permission to do that."
+  permission-check-unavailable: "&#ED4245Your bid was blocked because Auctions+ could not verify your offline bid permission. Join the server or install a Vault permissions provider."
+  invalid-player: "&#ED4245That player account could not be verified."
+  players-only: "&#ED4245Only players can use that."
+  api-unavailable: "&#ED4245Auctions+ is not ready yet."
+  economy-unavailable: "&#ED4245No Vault economy provider is available."
+  invalid-price: "&#ED4245Enter a price between &f{min} &#ED4245and &f{max}&#ED4245."
+  invalid-bid: "&#ED4245Enter a valid bid amount. Example: &f/ah bid 12 500"
+  invalid-listing-id: "&#ED4245Enter a valid listing ID. You can see IDs in &f/ah&#ED4245."
+  invalid-amount: "&#ED4245Enter an item amount from your hand. Example: &f1&#ED4245, &f8&#ED4245, or &f64&#ED4245."
+  invalid-duration: "&#ED4245Use a duration like &f30m&#ED4245, &f2h&#ED4245, or &f3d&#ED4245."
+  invalid-amount-or-duration: "&#ED4245Use an amount like &f8 &#ED4245or a duration like &f2h&#ED4245."
+  no-item: "&#ED4245Hold the item you want to list in your main hand."
+  blacklisted-item: "&#ED4245That item cannot be listed."
+  bidding-disabled: "&#ED4245Bidding auctions are disabled."
+  listing-limit: "&#ED4245You already have &f{limit} &#ED4245active listings. Cancel one with &f/ah active&#ED4245."
+  listing-fee-failed: "&#ED4245You need &f{fee} &#ED4245for the listing fee."
+  listing-created: "&7Listed &f{amount}x {item}&7 for &#2b98fd{price}&7. Manage it in &f/ah active&7."
+  auction-created: "&7Started auction &f#{id}&7 for &f{amount}x {item}&7. Start: &#2b98fd{price}&7, ends in &f{duration}&7."
+  listing-not-found: "&#ED4245That listing no longer exists."
+  listing-unavailable: "&#ED4245That listing is no longer available."
+  listing-expired: "&#ED4245That listing has expired."
+  listing-requires-bid: "&#ED4245That listing is an auction. Use &f/ah bid {id} {min_bid}&#ED4245."
+  not-biddable: "&#ED4245That listing is buy-now only. Use &f/ah buy {id} &#ED4245or click it in &f/ah&#ED4245."
+  cannot-bid-own: "&#ED4245You cannot bid on your own auction."
+  bid-too-low: "&#ED4245Bid at least &f{min_bid}&#ED4245. Current bid: &f{current_bid}&#ED4245."
+  bid-too-high: "&#ED4245Bid at most &f{max_bid}&#ED4245."
+  bid-complete: "&7Bid &#2b98fd{bid}&7 on &f#{id}&7, &f{item}&7. Next minimum: &f{next_bid}&7."
+  outbid-notify: "&f{bidder}&7 outbid you on &f{item}&7 with &#2b98fd{bid}&7. Your previous bid was refunded."
+  bid-seller-notify: "&f{bidder}&7 bid &#2b98fd{bid}&7 on your &f{item}&7."
+  auction-won-buyer: "&7You won &f{item}&7 for &#2b98fd{price}&7. It was added to your inventory."
+  auction-won-buyer-mail: "&7You won &f{item}&7 for &#2b98fd{price}&7. Your inventory was full, so it was sent to &f/ah claim&7."
+  auction-won-seller: "&f{winner}&7 won your &f{item}&7 for &#2b98fd{price}&7."
+  cannot-buy-own: "&#ED4245You cannot buy your own listing."
+  not-enough-money: "&#ED4245You need &f{price} &#ED4245to buy that."
+  purchase-failed: "&#ED4245Economy transaction failed: &f{reason}"
+  purchase-complete: "&7Bought &f{item}&7 for &#2b98fd{price}&7. It was added to your inventory."
+  purchase-complete-mail: "&7Bought &f{item}&7 for &#2b98fd{price}&7. Your inventory was full, so it was sent to &f/ah claim&7."
+  sale-notify: "&f{buyer}&7 bought your &f{item}&7 for &#2b98fd{price}&7."
+  cancel-complete: "&7Cancelled listing &f#{id}&7. It was returned to your inventory."
+  cancel-complete-mail: "&7Cancelled listing &f#{id}&7. Your inventory was full, so it was sent to &f/ah claim&7."
+  cancel-denied: "&#ED4245You can only cancel your own active listings."
+  admin-cancel-complete: "&7Cancelled listing &f#{id}&7 and returned it to &f{seller}&7."
+  listing-expired-returned: "&7Listing &f#{id}&7 expired. &f{item}&7 was returned to your inventory."
+  listing-expired-mail: "&7Listing &f#{id}&7 expired. &f{item}&7 was sent to &f/ah claim&7."
+  claim-empty: "&#ED4245You have no claim mail."
+  claim-inventory-full: "&#ED4245Make room in your inventory first."
+  claim-complete: "&7Claimed &f{item}&7."
+  saved: "&7Auction data saved."
+  reloaded: "&7Auctions+ reloaded."
+  status: "&7Listings: &f{active}&7 active, &f{total}&7 total. Claim mail: &f{claims}&7. Economy: &f{economy}&7."
+  help-ah: |-
+    &fAuctions+ Quick Guide
+    &#2b98fd/ah &8or &#2b98fd/auc &8- &7Open the auction house
+    &7Buy Now listings have a fixed price. Click one or use &f/ah buy <id>&7.
+    &7Timed Auctions take bids until they expire. Click one or use &f/ah bid <id> <amount>&7.
+    &7To sell at a fixed price: &f/ah sell <price> [amount] [duration]
+    &7To start bidding: &f/ah auction <starting bid> [amount] [duration]
+    &7Use &f/ah help sell&7, &f/ah help auction&7, or &f/ah help bid &7for examples.
+  usage-ah: |-
+    &fAuction House Commands
+    &#2b98fd/ah &8or &#2b98fd/auc &8- &7Browse listings
+    &#2b98fd/ah sell <price> [amount] [duration] &8- &7List the item in your hand
+    &#2b98fd/ah auction <start> [amount] [duration] &8- &7Start a timed bid auction
+    &#2b98fd/ah buy <id> &8- &7Buy a fixed-price listing
+    &#2b98fd/ah bid <id> <amount> &8- &7Bid on a timed auction
+    &#2b98fd/ah active &8- &7Manage your listings
+    &#2b98fd/ah claim &8- &7Collect won, bought, or returned items
+    &8Tip: &7Durations can be &f30m&7, &f2h&7, or &f3d&7.
+  usage-sell: "&7Hold an item, then use &#2b98fd/ah sell <price> [amount] [duration]&7. Example: &f/ah sell 250 16 2d"
+  usage-auction: "&7Hold an item, then use &#2b98fd/ah auction <starting bid> [amount] [duration]&7. Example: &f/ah auction 100 1 12h"
+  usage-buy: "&7Use &#2b98fd/ah buy <id>&7. You can find listing IDs in &f/ah&7."
+  usage-bid: "&7Use &#2b98fd/ah bid <id> <amount>&7. Example: &f/ah bid 12 500"
+  usage-claim: "&7Use &#2b98fd/ah claim&7 only when bought, won, returned, or expired items could not fit in your inventory."
+  usage-search: "&7Use &#2b98fd/ah search <text>&7. Example: &f/ah search diamond"
+  usage-cancel: "&7Use &#2b98fd/ah cancel <id>&7, or open &f/ah active&7."
+  usage-admin: |-
+    &fAuctions+ Admin Commands
+    &#2b98fd/auctionsplus stats &8- &7Show storage and economy status
+    &#2b98fd/auctionsplus reload &8- &7Reload config
+    &#2b98fd/auctionsplus save &8- &7Save auction data
+    &#2b98fd/auctionsplus cancel <id> &8- &7Return a listing to its seller
+  usage-admin-cancel: "&7Use &#2b98fd/auctionsplus cancel <id>&7."
