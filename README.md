@@ -1,6 +1,6 @@
 # AuctionsPlus
 
-**Get the plugin jar, setup help, and updates in the SQWARE Discord: [discord.sqware.gg](https://discord.sqware.gg).**
+**Join the SQWARE Discord: [discord.sqware.gg](https://discord.sqware.gg).**
 
 AuctionsPlus is a Minecraft auction house plugin for Paper servers. It provides `/ah` GUI listings, fixed-price sales, timed bid auctions, Vault economy support, expiry returns, and claim mail.
 
