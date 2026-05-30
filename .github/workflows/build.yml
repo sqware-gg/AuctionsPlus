@@ -19,7 +19,7 @@ jobs:
           cache: maven
 
       - name: Build
-        run: ./mvnw -B package
+        run: mvn -B package
 
       - name: Upload plugin jar
         uses: actions/upload-artifact@v4
