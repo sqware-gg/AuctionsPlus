@@ -24,7 +24,7 @@
         <java.version>25</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>${java.version}</maven.compiler.release>
-        <paper.version>26.1.2.build.65-stable</paper.version>
+        <paper.version>26.1.2.build.69-stable</paper.version>
         <bstats.version>3.2.1</bstats.version>
         <vault.version>1.7.1</vault.version>
     </properties>
