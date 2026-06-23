@@ -1,16 +1,18 @@
 name: AuctionsPlus
 version: 0.1.0
 main: dev.auctionsplus.AuctionsPlusPlugin
-api-version: '26.1.2'
+api-version: '26.2'
 author: SQWARE / Conflict
 website: https://sqware.gg
 description: A modern auction house with GUI listings, expiry returns, claim mail, and Vault economy support.
 depend:
   - Vault
+softdepend:
+  - LuckPerms
 commands:
   ah:
     description: Open and use the Auctions+ auction house.
-    usage: /ah [sell|auction|buy|bid|active|claim|search|cancel|help]
+    usage: /ah [list|sell|auction|buy|bid|active|claim|search|cancel|help]
     aliases:
       - auc
       - auctionhouse

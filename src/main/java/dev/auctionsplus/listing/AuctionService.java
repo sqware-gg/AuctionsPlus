@@ -106,11 +106,13 @@ public final class AuctionService {
         if (amount <= 0 || amount > hand.getAmount()) {
             return AuctionActionResult.failure("invalid-amount", Map.of());
         }
-        if (!seller.hasPermission("auctionsplus.limit.bypass")
-                && activeListings(seller.getUniqueId()).size() >= config.maxActivePerPlayer()) {
-            return AuctionActionResult.failure("listing-limit", Map.of(
-                    "limit", Integer.toString(config.maxActivePerPlayer())
-            ));
+        if (!seller.hasPermission("auctionsplus.limit.bypass")) {
+            int activeLimit = activeLimit(seller);
+            if (activeListings(seller.getUniqueId()).size() >= activeLimit) {
+                return AuctionActionResult.failure("listing-limit", Map.of(
+                        "limit", Integer.toString(activeLimit)
+                ));
+            }
         }
 
         long duration = Math.min(Math.max(1000L, durationMillis), config.maxDurationMillis());
@@ -191,11 +193,13 @@ public final class AuctionService {
         if (amount <= 0 || amount > hand.getAmount()) {
             return AuctionActionResult.failure("invalid-amount", Map.of());
         }
-        if (!seller.hasPermission("auctionsplus.limit.bypass")
-                && activeListings(seller.getUniqueId()).size() >= config.maxActivePerPlayer()) {
-            return AuctionActionResult.failure("listing-limit", Map.of(
-                    "limit", Integer.toString(config.maxActivePerPlayer())
-            ));
+        if (!seller.hasPermission("auctionsplus.limit.bypass")) {
+            int activeLimit = activeLimit(seller);
+            if (activeListings(seller.getUniqueId()).size() >= activeLimit) {
+                return AuctionActionResult.failure("listing-limit", Map.of(
+                        "limit", Integer.toString(activeLimit)
+                ));
+            }
         }
 
         long duration = Math.min(Math.max(1000L, durationMillis), config.maxDurationMillis());
@@ -684,6 +688,17 @@ public final class AuctionService {
             return false;
         }
         return config.maxPrice() <= 0.0D || price <= config.maxPrice();
+    }
+
+    private int activeLimit(Player player) {
+        int limit = config.maxActivePerPlayer();
+        for (String rank : permissions.rankNames(player)) {
+            Integer rankLimit = config.activeLimitByRank().get(rank);
+            if (rankLimit != null) {
+                limit = Math.max(limit, rankLimit);
+            }
+        }
+        return limit;
     }
 
     private String errorMessage(EconomyResponse response) {

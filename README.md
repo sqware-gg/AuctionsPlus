@@ -4,7 +4,7 @@
 
 AuctionsPlus is a Minecraft auction house plugin for Paper servers. It provides `/ah` GUI listings, fixed-price sales, timed bid auctions, Vault economy support, expiry returns, and claim mail.
 
-Use it as a modern AuctionHouse-style plugin when you need item trading that is clear for players and manageable for staff.
+Use it when you need item trading that is clear for players and manageable for staff.
 
 ## Features
 
@@ -13,13 +13,14 @@ Use it as a modern AuctionHouse-style plugin when you need item trading that is 
 - Vault-backed buy, sell, bid, fees, and tax handling.
 - Claim mail for bought, cancelled, expired, and returned items.
 - Search, active listings, listing limits, and admin cancellation.
+- LuckPerms/Vault rank-based active listing limit increases.
 - Permission bypasses for listing limits and fees.
 - Chat announcements for auction activity.
 - API events for companion plugins such as DiscordPlus.
 
 ## Requirements
 
-- Paper `26.1.2+`
+- Paper `26.2+`
 - Java `25+`
 - Vault
 - A Vault-compatible economy plugin

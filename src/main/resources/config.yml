@@ -1,7 +1,7 @@
 # AuctionsPlus
 # Used for update checks.
 # Do not change unless you know what you are doing.
-config-version: 9
+config-version: 10
 
 economy:
   min-price: 1.0
@@ -20,6 +20,11 @@ listings:
   default-duration-hours: 72
   max-duration-hours: 168
   max-active-per-player: 20
+  # Optional LuckPerms rank/group limits. The highest matching limit wins and never lowers max-active-per-player.
+  # Keys should match LuckPerms primary group/group names, lower-case.
+  rank-limits:
+    # vip: 30
+    # mvp: 40
   expire-check-seconds: 60
   save-interval-seconds: 300
   blacklisted-materials:
@@ -122,6 +127,7 @@ messages:
   help-ah: |-
     &fAuctions+ Quick Guide
     &#2b98fd/ah &8or &#2b98fd/auc &8- &7Open the auction house
+    &#2b98fd/ah list [search] [page] &8- &7Show listings in chat
     &7Buy Now listings have a fixed price. Click one or use &f/ah buy <id>&7.
     &7Timed Auctions take bids until they expire. Click one or use &f/ah bid <id> <amount>&7.
     &7To sell at a fixed price: &f/ah sell <price> [amount] [duration]
@@ -134,14 +140,16 @@ messages:
     &#2b98fd/ah auction <start> [amount] [duration] &8- &7Start a timed bid auction
     &#2b98fd/ah buy <id> &8- &7Buy a fixed-price listing
     &#2b98fd/ah bid <id> <amount> &8- &7Bid on a timed auction
+    &#2b98fd/ah list [search] [page] &8- &7List auctions in chat
     &#2b98fd/ah active &8- &7Manage your listings
-    &#2b98fd/ah claim &8- &7Collect won, bought, or returned items
+    &#2b98fd/ah active list [page] &8- &7List your auctions in chat
+    &#2b98fd/ah claim [id|all|list] &8- &7Collect won, bought, or returned items
     &8Tip: &7Durations can be &f30m&7, &f2h&7, or &f3d&7.
   usage-sell: "&7Hold an item, then use &#2b98fd/ah sell <price> [amount] [duration]&7. Example: &f/ah sell 250 16 2d"
   usage-auction: "&7Hold an item, then use &#2b98fd/ah auction <starting bid> [amount] [duration]&7. Example: &f/ah auction 100 1 12h"
   usage-buy: "&7Use &#2b98fd/ah buy <id>&7. You can find listing IDs in &f/ah&7."
   usage-bid: "&7Use &#2b98fd/ah bid <id> <amount>&7. Example: &f/ah bid 12 500"
-  usage-claim: "&7Use &#2b98fd/ah claim&7 only when bought, won, returned, or expired items could not fit in your inventory."
+  usage-claim: "&7Use &#2b98fd/ah claim [id|all|list]&7 when bought, won, returned, or expired items could not fit in your inventory."
   usage-search: "&7Use &#2b98fd/ah search <text>&7. Example: &f/ah search diamond"
   usage-cancel: "&7Use &#2b98fd/ah cancel <id>&7, or open &f/ah active&7."
   usage-admin: |-

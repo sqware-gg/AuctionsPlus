@@ -3,10 +3,14 @@ package dev.auctionsplus.config;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.EnumSet;
+import java.util.LinkedHashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,6 +20,7 @@ public final class AuctionsPlusConfig {
     private FileConfiguration config;
     private FileConfiguration defaultConfig;
     private Set<Material> blacklistedMaterials = EnumSet.noneOf(Material.class);
+    private Map<String, Integer> activeLimitByRank = Map.of();
 
     public AuctionsPlusConfig(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -26,6 +31,7 @@ public final class AuctionsPlusConfig {
         plugin.reloadConfig();
         config = plugin.getConfig();
         defaultConfig = loadBundledConfig();
+        activeLimitByRank = rankLimits("listings.rank-limits");
         blacklistedMaterials = EnumSet.noneOf(Material.class);
         for (String materialName : config.getStringList("listings.blacklisted-materials")) {
             Material material = Material.matchMaterial(materialName);
@@ -71,6 +77,10 @@ public final class AuctionsPlusConfig {
 
     public int maxActivePerPlayer() {
         return Math.max(1, config.getInt("listings.max-active-per-player", 20));
+    }
+
+    public Map<String, Integer> activeLimitByRank() {
+        return activeLimitByRank;
     }
 
     public long expireCheckTicks() {
@@ -147,5 +157,25 @@ public final class AuctionsPlusConfig {
             plugin.getLogger().warning("Could not load bundled config defaults: " + e.getMessage());
             return new YamlConfiguration();
         }
+    }
+
+    private Map<String, Integer> rankLimits(String path) {
+        ConfigurationSection section = config.getConfigurationSection(path);
+        if (section == null) {
+            return Map.of();
+        }
+        Map<String, Integer> limits = new LinkedHashMap<>();
+        for (String rank : section.getKeys(false)) {
+            if (rank == null || rank.isBlank()) {
+                continue;
+            }
+            int limit = section.getInt(rank, -1);
+            if (limit <= 0) {
+                plugin.getLogger().warning("Ignoring invalid rank limit at " + path + "." + rank + ": " + limit);
+                continue;
+            }
+            limits.put(rank.toLowerCase(Locale.ROOT), limit);
+        }
+        return Collections.unmodifiableMap(limits);
     }
 }
